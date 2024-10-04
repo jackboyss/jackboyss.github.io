@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Saya</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
 </head>
 <body>
     <header>
         <h1>Sultan Zaky</h1>
         <p>Web Developer | Desainer Grafis </p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#about">Tentang Saya</a></li>
-            <li><a href="#skills">Keahlian</a></li>
-            <li><a href="#projects">Proyek</a></li>
-            <li><a href="#contact">Kontak</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="#about">Tentang Saya</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>   
 
     <section id="about">
         <h2>Tentang Saya</h2>
@@ -35,6 +34,7 @@
             <li>PHP & Laravel</li>
             <li>UI/UX Design</li>
         </ul>
+        <p>Saya adalah seorang profesional dengan pengalaman di bidang pengembangan web dan data science. Saya suka menciptakan solusi yang berdampak.</p>
     </section>
 
     <section id="projects">
@@ -146,10 +146,68 @@
                 Open in New Window: Membuka sesi di jendela baru setelah mengklik Connect.
     
         </div>
-        <div class="project">
-            <h3>Proyek 2: E-Commerce Website</h3>
-            <p>Membangun situs e-commerce dengan fitur login, checkout, dan manajemen produk menggunakan PHP dan Laravel.</p>
-        </div>
+        <div class="project 2">
+            <h3>LAPORAN 2 KONFIGURASI IP ADDRES PERANGKAT MIKROTIK</h3>
+        
+        <div class="grid-container">
+            <div class="projek 2">
+                <h4>Pengertian IP Address</h4>
+                <p>IP Address (Internet Protocol Address) adalah sebuah alamat unik yang digunakan untuk mengidentifikasi perangkat dalam jaringan komputer, baik jaringan lokal maupun internet.</p>
+                <h4>Jenis - Jenis IP Address</h4>
+                <li>IP Address Publik (Public IP Address)</li>
+                <p>adalah IP yang digunakan untuk mengidentifikasi perangkat di jaringan internet global dan IP ini unik dan dialokasikan oleh penyedia layanan internet (ISP). contohnya :</p>
+                192.0.2.1
+                <br>
+                203.0.113.5
+                <br>
+                8.8.8.8 (Google DNS Server)
+
+               <li>IP Address Privat (Private IP Address)</li>
+                    <P>Adalah IP yang digunakan di dalam jaringan lokal (LAN) dan tidak dapat diakses langsung dari internet, dan Rentang IP privat sudah ditentukan dan tidak dapat digunakan untuk jaringan publik. Contohnya:</P>
+                    Rentang IP Privat Kelas A (10.0.0.0 – 10.255.255.255)
+                    <br>
+                    Rentang IP Privat Kelas B (172.16.0.0 – 172.31.255.255)
+                    <br>
+                    Rentang IP Privat Kelas C (192.168.0.0 – 192.168.255.255)
+                    <p>IP Privat ini digunakan oleh perangkat seperti komputer, router, atau smartphone yang terhubung ke jaringan lokal (LAN).</p>
+
+                <h4>Langkah - Langkah Konfigurasi IP Address Perangkat Mikrotik Menggunakan Winbox</h4>
+                <li>Pertama hidupkan terlebih dahulu pernagkat mikrotiknya dengan menghubungkan kabel powernya</li>
+                <li>Lalu pasang kabel LAN (RJ45) ke port Ether1 dan ujung satunya lagi ke sumber internet (ISP)</li>
+                <li>Pasang Juga kabel LAN ke port Ether2 dan ujung satunya lagi ke perangkat yang kita gunakan (PC Client)</li>
+
+                <h4>Konfigurasi IP Address Menggunakan DHCP Client</h4>
+                <li>buka IP > DHCP Client di tab sebelah kiri, Klik tombol "+"</li>
+                <li>Pada kolom Interface, pilih interface WAN (misalnya, ether1).</li>
+                <li>Centang opsi Add Default Route agar rute otomatis ditambahkan Klik Apply dan OK</li>
+
+                <h4>Konfigurasi Gateway (Default Route)</h4>
+                <li>Buka IP > Routes.</li>
+                <li>Jika menggunakan DHCP Client, default route akan secara otomatis ditambahkan. Jika tidak Klik tombol "+"Pada kolom Dst. Address, isikan 0.0.0.0/0 (untuk mengarahkan semua lalu lintas keluar).</li>
+                <li>Pada kolom Gateway, masukkan alamat IP gateway yang diberikan oleh ISP (misalnya: 192.168.1.1).</li>
+                <li>Klik Apply dan OK</li>
+
+                <h4>Konfigurasi DNS</h4>
+                <li>Buka IP > DNS.</li>
+                <li>Pada kolom Servers, masukkan DNS server yang diberikan oleh ISP atau gunakan DNS umum seperti 8.8.8.8 (Google DNS) dan 1.1.1.1 (Cloudflare DNS).</li>
+                <li>Centang Allow Remote Requests jika Anda ingin perangkat lain di jaringan bisa menggunakan Mikrotik sebagai server DN</li>
+                <li>Klik Apply dan OK</li>
+
+                <h4>Konfigurasi NAT (Network Address Translation)</h4>
+                <li>Buka IP > Firewall, kemudian pilih tab NAT dan Klik tombol "+"</li>
+                <li>Pada tab General, atur Chain: srcnat, Out. Interface: Pilih interface WAN yang terhubung ke ISP (misalnya, ether1).</li>
+                <li>Pindah ke tab Action, dan pilih Action: masquerade.</li>
+                <li>Klik Apply dan OK</li>
+
+                <h4>Konfigurasi LAN</h4>
+                <li>Buka IP > Addresses, dan tambahkan IP untuk jaringan internal (misalnya, 192.168.88.1/24 pada interface ether2).</li>
+                <li>Jika Anda membutuhkan DHCP Server untuk jaringan LAN : Buka IP > DHCP Server, Buat konfigurasi DHCP</li>
+                <li>Server untuk interface LAN (ether2), dan atur range IP yang diberikan ke perangkat di jaringan.</li>
+
+                <p>Dengan mengikuti langkah-langkah ini, perangkat Mikrotik Anda akan berhasil terhubung ke ISP dan mendistribusikan koneksi internet ke jaringan lokal.</p>
+
+                </div>
+
     </section>
 
     <section id="contact">
@@ -166,10 +224,12 @@
 
             <button type="submit">Kirim</button>
         </form>
+        <p>Email: <a href="mailto:email@example.com"><sultanzaky788gmail class="com"></sultanzaky788gmail></a></p>
     </section>
 
     <footer>
         <p>&copy; 2024  Sultan Zaky. jangan mencuri.</p>
+        <p>&copy; 2024 Nama Anda. Semua hak dilindungi.</p>
     </footer>
 </body>
 </html>
